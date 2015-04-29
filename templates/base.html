@@ -22,6 +22,12 @@
     {%- if name|lower == 'email' -%}
         {%- set iconattributes = 'fa fa-envelope-square fa-lg' -%}
     {%- endif -%}
+    {%- if name|lower == 'launchpad' -%}
+        {%- set iconattributes = 'fa fa-rocket fa-lg' -%}
+    {%- endif -%}
+    {%- if name.startswith('sileht') -%}
+        {%- set iconattributes = 'fa fa-weixin fa-lg' -%}
+    {%- endif -%}
     {{iconattributes}}
 {%- endmacro %}
 {% if article or page %}
@@ -202,6 +208,26 @@
                     </li>
                 </ul></li>
                 {% endif %}
+                {% for title, link in MENUITEMS %}
+                {% if loop.first%}
+                <li class="nav-divider"></li>
+                {% endif %}
+                <li>
+                    <a href="{{ link }}">
+			<span class="glyphicon glyphicon-user padding-small"></span>
+                        {{ title }}
+                    </a>
+                </li>
+                {% endfor %}
+
+                <li class="nav-divider"></li>
+                <li>
+                    <a href="{{ SITEURL }}/pages/about">
+			<span class="glyphicon glyphicon-user padding-small"></span>
+                        About
+                    </a>
+                </li>
+
                 {% if SOCIAL %}
                 <li class="nav-divider"></li>
                 <li>
@@ -221,16 +247,6 @@
                     {% endfor %}
                 </ul></li>
                 {% endif %}
-                {% for title, link in MENUITEMS %}
-                {% if loop.first%}
-                <li class="nav-divider"></li>
-                {% endif %}
-                <li>
-                    <a href="{{ link }}">
-                        {{ title }}
-                    </a>
-                </li>
-                {% endfor %}
                 
                 {% if DISPLAY_PAGES_ON_MENU %}
                 <li class="nav-divider"></li>
@@ -274,11 +290,6 @@
                 {% endif %}
                 
                 {% if DISPLAY_TAGS_ON_MENU %}
-                    {% if DISPLAY_TAGS_INLINE %}
-                        {% set tags = tag_cloud | sort(attribute='0') %}
-                    {% else %}
-                        {% set tags = tag_cloud | sort(attribute='1') %}
-                    {% endif %}
                 <li class="nav-divider"></li>
                 <li>
                     <a data-toggle="collapse" data-parent="#accordion" href="#collapse-tags">

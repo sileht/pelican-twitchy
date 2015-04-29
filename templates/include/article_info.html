@@ -4,9 +4,9 @@
             <span class="published">
                 <i class="fa fa-calendar padding-small"></i><time datetime="{{ article.date.isoformat() }}"> {{ article.locale_date }}</time>
             </span>
-            <span class="category">
+            <!--span class="category">
                 <i class="fa fa-folder-open padding-small"></i><a href="{{ SITEURL }}/{{ article.category.url }}">{{ article.category }}</a>
-            </span>
+            </span-->
             {% if article.tags %}
             <span class="tags">
                 <i class="fa fa-tags padding-small"></i>
